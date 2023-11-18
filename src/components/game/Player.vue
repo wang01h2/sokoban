@@ -3,30 +3,33 @@ import keeperImg from '../../assets/keeper.png'
 import {usePlayerStore} from "../../store/player.ts";
 import {computed} from "vue";
 
-const {player, movePlayerToLeft, movePlayerToRight, movePlayerToUp, movePlayerToDown} = usePlayerStore()
-// 键盘事件来控制移动
-// movePlayerToLeft
+const {player} = usePlayerStore()
+useMove()
 
-window.addEventListener('keyup', (e) => {
-  switch (e.code) {
-    case "ArrowLeft": {
-      movePlayerToLeft()
-      break
+function useMove() {
+  const {movePlayerToLeft, movePlayerToRight, movePlayerToUp, movePlayerToDown} = usePlayerStore()
+// 键盘事件来控制移动
+  window.addEventListener('keyup', (e) => {
+    switch (e.code) {
+      case "ArrowLeft": {
+        movePlayerToLeft()
+        break
+      }
+      case "ArrowRight": {
+        movePlayerToRight()
+        break
+      }
+      case "ArrowUp": {
+        movePlayerToUp()
+        break
+      }
+      case "ArrowDown": {
+        movePlayerToDown()
+        break
+      }
     }
-    case "ArrowRight": {
-      movePlayerToRight()
-      break
-    }
-    case "ArrowUp": {
-      movePlayerToUp()
-      break
-    }
-    case "ArrowDown": {
-      movePlayerToDown()
-      break
-    }
-  }
-})
+  })
+}
 
 const STEP = 32
 
