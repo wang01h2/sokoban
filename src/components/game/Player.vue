@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import keeperImg from '../../assets/keeper.png'
 import {usePlayerStore} from "../../store/player.ts";
-import {computed} from "vue";
+import {computed, onMounted, onUnmounted} from "vue";
 
 const STEP = 32
 
@@ -10,8 +10,8 @@ const {position} = usePosition()
 
 function useMove() {
   const {movePlayerToLeft, movePlayerToRight, movePlayerToUp, movePlayerToDown} = usePlayerStore()
-// 键盘事件来控制移动
-  window.addEventListener('keyup', (e) => {
+  // 键盘事件来控制移动
+  function handleKeyup(e: KeyboardEvent) {
     switch (e.code) {
       case "ArrowLeft": {
         movePlayerToLeft()
@@ -30,6 +30,15 @@ function useMove() {
         break
       }
     }
+  }
+
+  onMounted(() => {
+    window.addEventListener('keyup', (e) => {
+      handleKeyup(e)
+    })
+  })
+  onUnmounted(() => {
+    window.removeEventListener('keyup', handleKeyup)
   })
 }
 
@@ -43,7 +52,6 @@ function usePosition() {
   })
   return {position}
 }
-
 
 </script>
 
