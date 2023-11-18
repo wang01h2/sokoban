@@ -3,8 +3,10 @@ import keeperImg from '../../assets/keeper.png'
 import {usePlayerStore} from "../../store/player.ts";
 import {computed} from "vue";
 
-const {player} = usePlayerStore()
+const STEP = 32
+
 useMove()
+const {position} = usePosition()
 
 function useMove() {
   const {movePlayerToLeft, movePlayerToRight, movePlayerToUp, movePlayerToDown} = usePlayerStore()
@@ -31,15 +33,17 @@ function useMove() {
   })
 }
 
-const STEP = 32
+function usePosition() {
+  const {player} = usePlayerStore()
+  const position = computed(() => {
+    return {
+      "left": player.x * STEP + 'px',
+      "top": player.y * STEP + 'px'
+    }
+  })
+  return {position}
+}
 
-
-const position = computed(() => {
-  return {
-    "left": player.x * STEP + 'px',
-    "top": player.y * STEP + 'px'
-  }
-})
 
 </script>
 
