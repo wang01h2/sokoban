@@ -9,7 +9,7 @@ const { map } = useMapStore()
 </script>
 
 <template>
-  <div>
+  <div class="relative">
     <div v-for="(row, i) in map" class="flex">
       <div v-for="(col, j) in map[i]">
         <template v-if="map[i][j] === MapTile.FLOOR">
