@@ -1,4 +1,5 @@
 import {defineStore} from "pinia";
+import {Position} from "../composables/usePosition.ts";
 
 export enum MapTile {
   FLOOR = 2,
@@ -6,11 +7,6 @@ export enum MapTile {
 }
 
 type Map = MapTile[][]
-
-interface Position {
-  x: number,
-  y: number
-}
 
 export const useMapStore = defineStore("map", () => {
   let map = [
@@ -25,7 +21,7 @@ export const useMapStore = defineStore("map", () => {
     map.splice(0, map.length, ...newMap)
   }
 
-  function isWall(position: Position,) {
+  function isWall(position: Position) {
     return map[position.x][position.y] === MapTile.WALL
   }
 
