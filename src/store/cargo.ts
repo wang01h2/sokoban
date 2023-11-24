@@ -1,4 +1,5 @@
 import {defineStore} from "pinia";
+import {ref} from "vue";
 
 
 interface Cargo {
@@ -7,14 +8,33 @@ interface Cargo {
 }
 
 export const useCargoStore = defineStore('cargo', () => {
-  const cargos: Cargo[] = [
+  const cargos: Cargo[] = ref([
     {
-      x: 2,
-      y: 2,
+      x: 4,
+      y: 3,
     },
     {
-      x: 1,
-      y: 2
-    }]
-  return {cargos}
+      x: 3,
+      y: 4
+    }])
+
+  function setupCargo(cargos: Cargo[]) {
+    cargos.value = cargos
+  }
+
+  function initCargos(cargo: Cargo) {
+    cargos.value[0] = cargo
+  }
+
+  function getCargo() {
+    return cargos.value
+  }
+
+  function getCargoByPosition(position: Cargo) {
+    return getCargo()?.find(f => {
+      return f.x === position.x && f.y === position.y
+    })
+  }
+
+  return {cargos, setupCargo, getCargo, getCargoByPosition, initCargos}
 })
