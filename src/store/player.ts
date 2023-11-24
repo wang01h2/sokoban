@@ -27,13 +27,6 @@ export const usePlayerStore = defineStore('player', () => {
       y: player.y
     }
     // 移动箱子的位置
-    detectingMovingCargo(position)
-
-    player.x -= 1
-
-  }
-
-  function detectingMovingCargo(position: Position) {
     // 查找是否有箱子
     const cargo = getCargoByPosition(position)
     if (cargo) {
@@ -41,20 +34,52 @@ export const usePlayerStore = defineStore('player', () => {
       if (isWall({x: cargo.x - 1, y: cargo.y})) return
       cargo.x -= 1
     }
+    player.x -= 1
   }
 
   function movePlayerToRight() {
     if (isWall({x: player.x + 1, y: player.y})) return
+    const position = {
+      x: player.x + 1,
+      y: player.y
+    }
+
+    const cargo = getCargoByPosition(position)
+
+    if (cargo) {
+      if (isWall({x: cargo.x + 1, y: cargo.y})) return
+      cargo.x += 1
+    }
     player.x += 1
   }
 
   function movePlayerToUp() {
     if (isWall({x: player.x, y: player.y - 1})) return
+    const position = {
+      x: player.x,
+      y: player.y - 1
+    }
+
+    const cargo = getCargoByPosition(position)
+
+    if (cargo) {
+      if (isWall({x: cargo.x, y: cargo.y - 1})) return
+      cargo.y -= 1
+    }
     player.y -= 1
   }
 
   function movePlayerToDown() {
     if (isWall({x: player.x, y: player.y + 1})) return
+    const position = {
+      x: player.x,
+      y: player.y + 1
+    }
+    const cargo = getCargoByPosition(position)
+    if (cargo) {
+      if (isWall({x: cargo.x, y: cargo.y + 1})) return
+      cargo.y += 1
+    }
     player.y += 1
   }
 

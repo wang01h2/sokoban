@@ -31,6 +31,7 @@ describe('cargo', () => {
       initCargos({x: 1, y: player.y})
       const cargo = getCargo()[0]
       expect(cargo.x).toBe(1)
+      expect(player.x).toBe(2)
     })
     it('should not move to right when collision a wall', () => {
       // 测试第一步：准备数据
