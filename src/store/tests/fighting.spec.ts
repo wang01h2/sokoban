@@ -22,14 +22,13 @@ describe('fighting', () => {
         [1, 1, 1, 1, 1],
       ])
     })
-    it('normal move', () => {
+    it('玩家和箱子', () => {
       // 测试第一步：准备数据
-      const {player} = usePlayerStore()
+      const {player, initPlayer} = usePlayerStore()
       const {fighting} = useFightingStore()
       const {getCargo, initCargos} = useCargoStore()
-      player.x = 2
-      player.y = 1
-      initCargos([{x: 1, y: player.y}])
+      initPlayer({x: 3, y: 1})
+      initCargos([{x: 2, y: 1}])
 
       fighting(Direction.left)
 
