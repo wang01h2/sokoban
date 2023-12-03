@@ -100,5 +100,14 @@ describe('player', () => {
       movePlayerToDown()
       expect(player.y).toBe(3)
     })
+
+    it('当有两个箱子的时候，另外一个箱子不可以移动', () => {
+      // 测试第一步：准备数据
+      const {movePlayerToDown, player} = usePlayerStore()
+      player.x = 1
+      player.y = 3
+      movePlayerToDown()
+      expect(player.y).toBe(3)
+    });
   })
 })

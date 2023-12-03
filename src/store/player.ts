@@ -2,11 +2,18 @@ import {defineStore} from "pinia";
 import {reactive} from "vue";
 import {useMapStore, Map} from "./map.ts";
 import {useCargoStore} from "./cargo";
+import {useFightingStore} from "./fighting";
 
-
-interface Position {
+export interface Player {
   x: number,
   y: number
+}
+
+enum Direction {
+  left = 'left',
+  right = 'right',
+  up = 'up',
+  down = 'down'
 }
 
 export const usePlayerStore = defineStore('player', () => {
@@ -14,74 +21,29 @@ export const usePlayerStore = defineStore('player', () => {
     x: 5,
     y: 3
   })
-  const {isWall} = useMapStore()
-  const {getCargoByPosition} = useCargoStore()
+  const {fighting} = useFightingStore()
 
   function movePlayerToLeft() {
-    // 判断人的位置
-    if (isWall({x: player.x - 1, y: player.y})) return
-
-    // 需要获取到左侧的箱子
-    const position: Position = {
-      x: player.x - 1,
-      y: player.y
-    }
-    // 移动箱子的位置
-    // 查找是否有箱子
-    const cargo = getCargoByPosition(position)
-    if (cargo) {
-      // 判断箱子是否撞墙
-      if (isWall({x: cargo.x - 1, y: cargo.y})) return
-      cargo.x -= 1
-    }
-    player.x -= 1
+    fighting(Direction.left)
   }
 
   function movePlayerToRight() {
-    if (isWall({x: player.x + 1, y: player.y})) return
-    const position = {
-      x: player.x + 1,
-      y: player.y
-    }
-
-    const cargo = getCargoByPosition(position)
-
-    if (cargo) {
-      if (isWall({x: cargo.x + 1, y: cargo.y})) return
-      cargo.x += 1
-    }
-    player.x += 1
+    fighting(Direction.right)
   }
 
+
   function movePlayerToUp() {
-    if (isWall({x: player.x, y: player.y - 1})) return
-    const position = {
-      x: player.x,
-      y: player.y - 1
-    }
-
-    const cargo = getCargoByPosition(position)
-
-    if (cargo) {
-      if (isWall({x: cargo.x, y: cargo.y - 1})) return
-      cargo.y -= 1
-    }
-    player.y -= 1
+    fighting(Direction.up)
   }
 
   function movePlayerToDown() {
-    if (isWall({x: player.x, y: player.y + 1})) return
-    const position = {
-      x: player.x,
-      y: player.y + 1
-    }
-    const cargo = getCargoByPosition(position)
-    if (cargo) {
-      if (isWall({x: cargo.x, y: cargo.y + 1})) return
-      cargo.y += 1
-    }
-    player.y += 1
+    fighting(Direction.down)
   }
 
-  return {player, movePlayerToLeft, movePlayerToRight, movePlayerToUp, movePlayerToDown}
+  function initPlayer(position: Player) {
+    player.x = position.x
+    player.y = position.y
+  }
+
+  return {player, movePlayerToLeft, movePlayerToRight, movePlayerToUp, movePlayerToDown, initPlayer}
 })

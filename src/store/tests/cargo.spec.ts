@@ -57,5 +57,10 @@ describe('cargo', () => {
       movePlayerToDown()
       expect(player.y).toBe(3)
     })
+
+    it('测试是否能获取到箱子', () => {
+      const {getCargoByPosition} = useCargoStore()
+      expect(getCargoByPosition({x: 4, y: 3})).toStrictEqual({x: 4, y: 3})
+    })
   })
 })

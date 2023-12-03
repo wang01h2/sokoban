@@ -15,15 +15,15 @@ export const useCargoStore = defineStore('cargo', () => {
     },
     {
       x: 3,
-      y: 4
+      y: 3
     }])
 
   function setupCargo(cargos: Cargo[]) {
     cargos.value = cargos
   }
 
-  function initCargos(cargo: Cargo) {
-    cargos.value[0] = cargo
+  function initCargos(cargo: Cargo[]) {
+    cargos.value = cargo
   }
 
   function getCargo() {
