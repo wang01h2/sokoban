@@ -3,14 +3,7 @@ import {reactive} from "vue";
 import {useMapStore, Map} from "./map.ts";
 import {useCargoStore} from "./cargo";
 import {Position, usePositionStore} from "./position";
-import {Player, usePlayerStore} from "./player";
-
-export enum Direction {
-  left = 'left',
-  right = 'right',
-  up = 'up',
-  down = 'down'
-}
+import {Direction, usePlayerStore} from "./player";
 
 export const useFightingStore = defineStore('fighting', () => {
   const player = reactive({

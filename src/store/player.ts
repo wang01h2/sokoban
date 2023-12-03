@@ -1,7 +1,6 @@
 import {defineStore} from "pinia";
 import {reactive} from "vue";
-import {useMapStore, Map} from "./map.ts";
-import {useCargoStore} from "./cargo";
+import {Map} from "./map.ts";
 import {useFightingStore} from "./fighting";
 
 export interface Player {
@@ -9,7 +8,7 @@ export interface Player {
   y: number
 }
 
-enum Direction {
+export enum Direction {
   left = 'left',
   right = 'right',
   up = 'up',
