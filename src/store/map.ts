@@ -1,5 +1,6 @@
 import {defineStore} from "pinia";
 import {Position} from "../composables/usePosition.ts";
+import {useCargoStore} from "./cargo.ts";
 
 export enum MapTile {
   FLOOR = 2,
@@ -9,6 +10,7 @@ export enum MapTile {
 type Map = MapTile[][]
 
 export const useMapStore = defineStore("map", () => {
+  const {getCargoByPosition} = useCargoStore()
   let map = [
     [1, 1, 1, 1, 1, 1, 1, 1],
     [1, 2, 2, 2, 2, 2, 2, 1],
@@ -28,6 +30,11 @@ export const useMapStore = defineStore("map", () => {
     return map[position.x][position.y] === MapTile.WALL
   }
 
-  return {map, setupMap, isWall}
+  function cargoCollision(position: Position) {
+    const cargo = getCargoByPosition(position)
+    return !!cargo
+  }
+
+  return {map, setupMap, isWall, cargoCollision}
 })
 

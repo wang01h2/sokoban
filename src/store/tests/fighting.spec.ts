@@ -69,6 +69,21 @@ describe('fighting', () => {
       expect(cargo.x).toBe(1)
       expect(player.x).toBe(2)
     })
+
+    it('箱子碰箱子', () => {
+      const {player, initPlayer} = usePlayerStore()
+      const {fighting} = useFightingStore()
+      const {getCargo, initCargos} = useCargoStore()
+      initPlayer({x: 3, y: 1})
+      initCargos([{x: 1, y: 1},{x: 2, y: 1}])
+
+      fighting(Direction.left)
+      const firstCargo = getCargo()[0]
+      const secondCargo = getCargo()[1]
+      expect(firstCargo.x).toBe(1)
+      expect(secondCargo.x).toBe(2)
+      expect(player.x).toBe(3)
+    })
   })
   describe('move to right', () => {
     it('玩家和箱子', () => {
@@ -120,6 +135,21 @@ describe('fighting', () => {
       expect(cargo.x).toBe(3)
       expect(player.x).toBe(2)
     })
+    it('箱子碰箱子', () => {
+      const {player, initPlayer} = usePlayerStore()
+      const {fighting} = useFightingStore()
+      const {getCargo, initCargos} = useCargoStore()
+      initPlayer({x: 1, y: 1})
+      initCargos([{x: 2, y: 1},{x: 3, y: 1}])
+
+      fighting(Direction.right)
+      const firstCargo = getCargo()[0]
+      const secondCargo = getCargo()[1]
+      expect(firstCargo.x).toBe(2)
+      expect(secondCargo.x).toBe(3)
+      expect(player.x).toBe(1)
+    })
+
   })
   describe('move to up', () => {
     it('玩家和箱子', () => {
@@ -171,6 +201,20 @@ describe('fighting', () => {
       expect(cargo.y).toBe(1)
       expect(player.y).toBe(2)
     })
+    it('箱子碰箱子', () => {
+      const {player, initPlayer} = usePlayerStore()
+      const {fighting} = useFightingStore()
+      const {getCargo, initCargos} = useCargoStore()
+      initPlayer({x: 2, y: 4})
+      initCargos([{x: 2, y: 2},{x: 2, y: 3}])
+
+      fighting(Direction.up)
+      const firstCargo = getCargo()[0]
+      const secondCargo = getCargo()[1]
+      expect(firstCargo.y).toBe(2)
+      expect(secondCargo.y).toBe(3)
+      expect(player.y).toBe(4)
+    })
   })
   describe('move to down', () => {
     it('玩家和箱子', () => {
@@ -221,6 +265,20 @@ describe('fighting', () => {
       const cargo = getCargo()[0]
       expect(cargo.y).toBe(3)
       expect(player.y).toBe(2)
+    })
+    it('箱子碰箱子', () => {
+      const {player, initPlayer} = usePlayerStore()
+      const {fighting} = useFightingStore()
+      const {getCargo, initCargos} = useCargoStore()
+      initPlayer({x: 3, y: 1})
+      initCargos([{x: 3, y: 2},{x: 3, y: 3}])
+
+      fighting(Direction.down)
+      const firstCargo = getCargo()[0]
+      const secondCargo = getCargo()[1]
+      expect(firstCargo.y).toBe(2)
+      expect(secondCargo.y).toBe(3)
+      expect(player.y).toBe(1)
     })
   })
 })

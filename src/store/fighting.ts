@@ -10,12 +10,10 @@ export const useFightingStore = defineStore('fighting', () => {
     x: 5,
     y: 3
   })
-  const {isWall} = useMapStore()
+  const {isWall, cargoCollision} = useMapStore()
   const {getCargoByPosition} = useCargoStore()
   const {calcLeftPosition, calcRightPosition, calcUpPosition, calcDownPosition} = usePositionStore()
 
-
-  let _player: Position
 
   function fighting(direction: Direction) {
     const {player} = usePlayerStore()
@@ -38,6 +36,7 @@ export const useFightingStore = defineStore('fighting', () => {
     const cargo = getCargoByPosition(calcPositionFn(player))
     if (cargo) {
       if (isWall(calcPositionFn(cargo))) return
+      if (cargoCollision(calcPositionFn(cargo))) return
       // cargo.x += 1
       cargo[dirPropName] += 1 * dir
     }
