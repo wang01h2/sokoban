@@ -14,7 +14,7 @@ jobs:
       # 指定 node 版本
       - uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: '18'
 
       - name: Install and Build 🔧 # 安装依赖、打包，如果提前已打包好无需这一步
         run: |
