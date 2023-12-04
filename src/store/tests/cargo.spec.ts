@@ -28,7 +28,7 @@ describe('cargo', () => {
       player.x = 1
       player.y = 1
       movePlayerToLeft()
-      initCargos({x: 1, y: player.y})
+      initCargos([{x: 1, y: player.y}])
       const cargo = getCargo()[0]
       expect(cargo.x).toBe(1)
       expect(player.x).toBe(2)

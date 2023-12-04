@@ -17,7 +17,7 @@ const {_placePoints} = usePlacePointStore()
   <Map>
   </Map>
   <template v-for="(point) in _placePoints">
-    <PlacePoint :onTarget="point.onTarget" :x="point.x" :y="point.y"/>
+    <PlacePoint :x="point.x" :y="point.y"/>
   </template>
   <template v-for="(cargo) in cargos">
     <Cargo :onTarget="cargo.onTarget" :x="cargo.x" :y="cargo.y"/>

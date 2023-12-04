@@ -1,6 +1,5 @@
 import {defineStore} from "pinia";
 import {reactive} from "vue";
-import {Map} from "./map.ts";
 import {useFightingStore} from "./fighting";
 
 export interface Player {
@@ -45,9 +44,6 @@ export const usePlayerStore = defineStore('player', () => {
     player.x = position.x
     player.y = position.y
     player.onTarget = false
-  }
-  function playerPointOnTarget(){
-
   }
 
   return {player, movePlayerToLeft, movePlayerToRight, movePlayerToUp, movePlayerToDown, initPlayer}

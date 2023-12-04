@@ -1,5 +1,5 @@
 import {beforeEach, describe, expect, it} from "vitest";
-import {setupMap, useMapStore} from "../map.ts";
+import {useMapStore} from "../map.ts";
 import {createPinia, setActivePinia} from "pinia";
 
 describe('map', () => {

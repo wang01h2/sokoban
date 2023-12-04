@@ -6,8 +6,12 @@ export interface Position {
 }
 
 export const usePositionStore = defineStore('position', () => {
+  const error = {
+    x: 0,
+    y: 0
+  }
   function calcLeftPosition(position: Position) {
-    if (!position) return
+    if (!position) return error
     return {
       x: position.x - 1,
       y: position.y
@@ -15,6 +19,7 @@ export const usePositionStore = defineStore('position', () => {
   }
 
   function calcRightPosition(position: Position) {
+    if (!position) return error
     return {
       x: position.x + 1,
       y: position.y
@@ -22,6 +27,7 @@ export const usePositionStore = defineStore('position', () => {
   }
 
   function calcUpPosition(position: Position) {
+    if (!position) return error
     return {
       x: position.x,
       y: position.y - 1
@@ -29,6 +35,7 @@ export const usePositionStore = defineStore('position', () => {
   }
 
   function calcDownPosition(position: Position) {
+    if (!position) return error
     return {
       x: position.x,
       y: position.y + 1

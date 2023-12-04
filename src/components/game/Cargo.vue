@@ -6,7 +6,7 @@ import {usePosition} from "../../composables/usePosition.ts";
 interface Props {
   x: number,
   y: number,
-  onTarget: boolean
+  onTarget?: boolean
 }
 
 const props = defineProps<Props>()

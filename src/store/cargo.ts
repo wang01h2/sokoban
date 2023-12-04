@@ -1,18 +1,19 @@
 import {defineStore} from "pinia";
-import {ref} from "vue";
+import {Ref, ref} from "vue";
 
 
 interface Cargo {
   x: number,
   y: number,
-  onTarget: boolean
+  onTarget?: boolean
 }
 
 export const useCargoStore = defineStore('cargo', () => {
-  const _cargos: Cargo[] = ref([])
+  const _cargos: Ref<Cargo[]> = ref([])
+
 
   function initCargos(cargo: Cargo[]) {
-    _cargos.value = cargo?.map((m) => {
+    _cargos.value = cargo?.map((m: Cargo) => {
       return {...m, onTarget: false}
     })
   }
@@ -22,7 +23,7 @@ export const useCargoStore = defineStore('cargo', () => {
   }
 
   function getCargoByPosition(position: Cargo) {
-    return getCargo()?.find(f => {
+    return getCargo()?.find((f: Cargo) => {
       return f.x === position.x && f.y === position.y
     })
   }

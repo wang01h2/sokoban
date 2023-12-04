@@ -1,16 +1,11 @@
 import {defineStore} from "pinia";
-import {reactive} from "vue";
-import {useMapStore, Map} from "./map.ts";
+import {useMapStore} from "./map.ts";
 import {useCargoStore} from "./cargo";
 import {Position, usePositionStore} from "./position";
 import {Direction, usePlayerStore} from "./player";
 import {usePlacePointStore} from "./placePoint.ts";
 
 export const useFightingStore = defineStore('fighting', () => {
-  const player = reactive({
-    x: 5,
-    y: 3
-  })
   const {isWall, cargoCollision} = useMapStore()
   const {getCargoByPosition} = useCargoStore()
   const {calcLeftPosition, calcRightPosition, calcUpPosition, calcDownPosition} = usePositionStore()
@@ -18,7 +13,7 @@ export const useFightingStore = defineStore('fighting', () => {
 
   function fighting(direction: Direction) {
     const {player} = usePlayerStore()
-    const {getPlacePoints, getPlacePointByPosition} = usePlacePointStore()
+    const {getPlacePointByPosition} = usePlacePointStore()
     // 1.箱子推到 放置点
     // 2.箱子检测是不是碰到了箱子
     const map: Record<string, {
