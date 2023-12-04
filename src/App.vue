@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import Game from "./components/game/Game.vue";
-
-
+// import Game from "./components/game/Game.vue";
 </script>
 
 <template>
   <div>
-    <Game></Game>
+    <h1>test</h1>
+<!--    <Game></Game>-->
   </div>
 </template>
 
