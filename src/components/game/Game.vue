@@ -16,13 +16,13 @@ const {_placePoints} = usePlacePointStore()
 <template>
   <Map>
   </Map>
-  <Player></Player>
   <template v-for="(point) in _placePoints">
     <PlacePoint :onTarget="point.onTarget" :x="point.x" :y="point.y"/>
   </template>
   <template v-for="(cargo) in cargos">
     <Cargo :onTarget="cargo.onTarget" :x="cargo.x" :y="cargo.y"/>
   </template>
+  <Player></Player>
 </template>
 
 <style scoped>
