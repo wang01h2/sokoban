@@ -4,30 +4,21 @@ import {ref} from "vue";
 
 interface Cargo {
   x: number,
-  y: number
+  y: number,
+  onTarget: boolean
 }
 
 export const useCargoStore = defineStore('cargo', () => {
-  const cargos: Cargo[] = ref([
-    {
-      x: 4,
-      y: 3,
-    },
-    {
-      x: 3,
-      y: 3
-    }])
-
-  function setupCargo(cargos: Cargo[]) {
-    cargos.value = cargos
-  }
+  const _cargos: Cargo[] = ref([])
 
   function initCargos(cargo: Cargo[]) {
-    cargos.value = cargo
+    _cargos.value = cargo?.map((m) => {
+      return {...m, onTarget: false}
+    })
   }
 
   function getCargo() {
-    return cargos.value
+    return _cargos.value
   }
 
   function getCargoByPosition(position: Cargo) {
@@ -36,5 +27,5 @@ export const useCargoStore = defineStore('cargo', () => {
     })
   }
 
-  return {cargos, setupCargo, getCargo, getCargoByPosition, initCargos}
+  return {cargos: _cargos, getCargo, getCargoByPosition, initCargos}
 })

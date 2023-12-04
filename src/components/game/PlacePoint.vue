@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import cargoImg from "../../assets/cargo.png";
-import cargoOnTargetImg from "../../assets/cargo_on_target.png";
+import pointImg from "../../assets/target.png";
 import {usePosition} from "../../composables/usePosition.ts";
 
 interface Props {
@@ -17,8 +16,7 @@ const {position} = usePosition(props)
 
 <template>
   <div class="absolute" :style="position">
-    <img v-if="onTarget" :src="cargoOnTargetImg" alt="">
-    <img v-else :src="cargoImg" alt="">
+    <img :src="pointImg" alt="">
   </div>
 </template>
 

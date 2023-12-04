@@ -4,6 +4,7 @@ import {createPinia, setActivePinia} from "pinia";
 import {useMapStore} from "../map.ts";
 import {useCargoStore} from "../cargo";
 import {useFightingStore} from "../fighting";
+import {usePlacePointStore} from "../placePoint.ts";
 
 describe('fighting', () => {
   // 创建 pinia
@@ -75,7 +76,7 @@ describe('fighting', () => {
       const {fighting} = useFightingStore()
       const {getCargo, initCargos} = useCargoStore()
       initPlayer({x: 3, y: 1})
-      initCargos([{x: 1, y: 1},{x: 2, y: 1}])
+      initCargos([{x: 1, y: 1}, {x: 2, y: 1}])
 
       fighting(Direction.left)
       const firstCargo = getCargo()[0]
@@ -84,6 +85,25 @@ describe('fighting', () => {
       expect(secondCargo.x).toBe(2)
       expect(player.x).toBe(3)
     })
+    it('推箱子到放置点', () => {
+      const {player, initPlayer} = usePlayerStore()
+      const {fighting} = useFightingStore()
+      const {getCargo, initCargos} = useCargoStore()
+      const {initPlacePoints} = usePlacePointStore()
+      initPlayer({x: 3, y: 1})
+      initCargos([{x: 1, y: 3}, {x: 2, y: 1}])
+      initPlacePoints([{x: 1, y: 1}])
+
+      fighting(Direction.left)
+
+      const firstCargo = getCargo()[0]
+      const secondCargo = getCargo()[1]
+      expect(firstCargo.x).toBe(1)
+      expect(secondCargo.x).toBe(1)
+      expect(secondCargo.onTarget).toBe(true)
+      expect(player.x).toBe(2)
+    })
+
   })
   describe('move to right', () => {
     it('玩家和箱子', () => {
@@ -140,7 +160,7 @@ describe('fighting', () => {
       const {fighting} = useFightingStore()
       const {getCargo, initCargos} = useCargoStore()
       initPlayer({x: 1, y: 1})
-      initCargos([{x: 2, y: 1},{x: 3, y: 1}])
+      initCargos([{x: 2, y: 1}, {x: 3, y: 1}])
 
       fighting(Direction.right)
       const firstCargo = getCargo()[0]
@@ -206,7 +226,7 @@ describe('fighting', () => {
       const {fighting} = useFightingStore()
       const {getCargo, initCargos} = useCargoStore()
       initPlayer({x: 2, y: 4})
-      initCargos([{x: 2, y: 2},{x: 2, y: 3}])
+      initCargos([{x: 2, y: 2}, {x: 2, y: 3}])
 
       fighting(Direction.up)
       const firstCargo = getCargo()[0]
@@ -271,7 +291,7 @@ describe('fighting', () => {
       const {fighting} = useFightingStore()
       const {getCargo, initCargos} = useCargoStore()
       initPlayer({x: 3, y: 1})
-      initCargos([{x: 3, y: 2},{x: 3, y: 3}])
+      initCargos([{x: 3, y: 2}, {x: 3, y: 3}])
 
       fighting(Direction.down)
       const firstCargo = getCargo()[0]

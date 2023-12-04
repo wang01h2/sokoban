@@ -5,7 +5,8 @@ import {useFightingStore} from "./fighting";
 
 export interface Player {
   x: number,
-  y: number
+  y: number,
+  onTarget?: boolean
 }
 
 export enum Direction {
@@ -17,8 +18,9 @@ export enum Direction {
 
 export const usePlayerStore = defineStore('player', () => {
   const player = reactive({
-    x: 5,
-    y: 3
+    x: 1,
+    y: 1,
+    onTarget: false
   })
   const {fighting} = useFightingStore()
 
@@ -42,6 +44,10 @@ export const usePlayerStore = defineStore('player', () => {
   function initPlayer(position: Player) {
     player.x = position.x
     player.y = position.y
+    player.onTarget = false
+  }
+  function playerPointOnTarget(){
+
   }
 
   return {player, movePlayerToLeft, movePlayerToRight, movePlayerToUp, movePlayerToDown, initPlayer}
