@@ -3,7 +3,7 @@ import Game from "./components/game/Game.vue";
 </script>
 
 <template>
-  <div>
+  <div class="flex justify-center">
     <Game></Game>
   </div>
 </template>

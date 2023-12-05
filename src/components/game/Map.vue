@@ -3,14 +3,12 @@ import {MapTile, useMapStore} from "../../store/map.ts";
 import floorImg from '../../assets/floor.png'
 import wallImg from '../../assets/wall.png'
 
-const { map } = useMapStore()
-
-
+const {map} = useMapStore()
 </script>
 
 <template>
   <div class="relative">
-    <div v-for="(row, i) in map" class="flex">
+    <div v-for="(row, i) in map" class="flex justify-center align-middle">
       <div v-for="(col, j) in map[i]">
         <template v-if="map[i][j] === MapTile.FLOOR">
           <img :src="floorImg" alt="">
