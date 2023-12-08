@@ -4,12 +4,13 @@ import {useCargoStore} from "./cargo";
 import {Position, usePositionStore} from "./position";
 import {Direction, usePlayerStore} from "./player";
 import {usePlacePointStore} from "./placePoint.ts";
+import {useGameStore} from "./game.ts";
 
 export const useFightingStore = defineStore('fighting', () => {
   const {isWall, cargoCollision} = useMapStore()
-  const {getCargoByPosition} = useCargoStore()
+  const {getCargoByPosition, checkIfTheGameIsOver} = useCargoStore()
   const {calcLeftPosition, calcRightPosition, calcUpPosition, calcDownPosition} = usePositionStore()
-
+  const {showConfetti} = useGameStore()
 
   function fighting(direction: Direction) {
     const {player} = usePlayerStore()
@@ -44,6 +45,11 @@ export const useFightingStore = defineStore('fighting', () => {
       // 检测是否到放置点
       if (getPlacePointByPosition(nextPoint)) {
         cargo.onTarget = true
+      }
+
+      // 检测是否游戏结束
+      if (checkIfTheGameIsOver()) {
+        showConfetti()
       }
     }
     // player.x += 1

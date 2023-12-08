@@ -28,5 +28,15 @@ export const useCargoStore = defineStore('cargo', () => {
     })
   }
 
-  return {cargos: _cargos, getCargo, getCargoByPosition, initCargos}
+  /*
+  * todo: 两种状态
+  * 成功：所有箱子都推到放置点
+  * 失败：有一个箱子推到墙边
+  * */
+
+  function checkIfTheGameIsOver() {
+    return getCargo()?.filter((f: Cargo) => f.onTarget === true)?.length === _cargos.value.length
+  }
+
+  return {cargos: _cargos, getCargo, getCargoByPosition, initCargos, checkIfTheGameIsOver}
 })
